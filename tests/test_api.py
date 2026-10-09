@@ -5,6 +5,7 @@ from fastapi import HTTPException
 
 from app import stellar
 from app.config import Settings
+from app.models import EventsResponse, NetworkStatusResponse, ScreeningResponse
 from app.main import app
 
 client = TestClient(app)
@@ -15,6 +16,18 @@ def test_health_and_cors():
     assert client.get("/health").json() == {"status": "ok"}
     response = client.options("/risk/score", headers={"Origin": "http://localhost:3000", "Access-Control-Request-Method": "POST"})
     assert response.headers["access-control-allow-origin"] == "http://localhost:3000"
+
+
+def test_public_response_models_are_documented_with_examples():
+    schemas = client.get("/openapi.json").json()["components"]["schemas"]
+
+    assert schemas["ScreeningResponse"]["examples"]
+    assert schemas["EventsResponse"]["examples"]
+    assert schemas["NetworkStatusResponse"]["examples"]
+
+    assert ScreeningResponse.model_fields["score"].annotation is int
+    assert "events" in EventsResponse.model_fields
+    assert "status" in NetworkStatusResponse.model_fields
 
 
 def test_score_uses_horizon_data_and_returns_bounded_explainable_signals(monkeypatch):

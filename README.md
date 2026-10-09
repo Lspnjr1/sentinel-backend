@@ -4,6 +4,8 @@
 
 Read-only FastAPI service for screening Stellar accounts and reading Soroban contract events. It fetches account activity from Horizon, exposes network status and events from Stellar RPC, and does not hold signing keys or submit transactions. Screening scores are transparent heuristics, not proof of fraud or financial/compliance advice.
 
+Screening, network-status, and event routes publish Pydantic response schemas and representative examples in `/openapi.json`. Optional upstream event and ledger fields remain nullable.
+
 ## Architecture
 
 ```mermaid

@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import get_settings
 from app.stellar import network_status
 from app.routers import health, events, risk
+from app.models import NetworkStatusResponse
 
 settings = get_settings()
 
@@ -25,7 +26,7 @@ app.include_router(events.router, prefix="/events", tags=["events"])
 app.include_router(risk.router, prefix="/risk", tags=["risk"])
 
 
-@app.get("/network/status", tags=["network"])
+@app.get("/network/status", tags=["network"], response_model=NetworkStatusResponse)
 def get_network_status():
     """Report Soroban RPC health and the RPC's current retained ledger window."""
     return network_status()
