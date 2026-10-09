@@ -101,6 +101,7 @@ class EventsSourceResponse(BaseModel):
     rpc_url: str
     network: str
     contract_id: str | None = None
+    ingestion_status: str | None = None
 
 
 class EventsResponse(BaseModel):
