@@ -92,6 +92,7 @@ class FlagEventResponse(BaseModel):
     agent: str | None = None
     subject: str | None = None
     score: Any = None
+    report_digest: str | None = None
     contract_id: str | None = None
     tx_hash: str | None = None
 
@@ -111,6 +112,7 @@ class EventsResponse(BaseModel):
             "agent": "GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "subject": "GBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
             "score": 82,
+            "report_digest": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
             "contract_id": "CCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "tx_hash": "transaction-hash",
         }],
