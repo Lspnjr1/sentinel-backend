@@ -39,6 +39,7 @@ class ScreeningResponse(BaseModel):
         "risk_level": "low",
         "threshold": 70,
         "threshold_exceeded": False,
+        "scoring_policy_version": "1.0.0",
         "signals": [],
         "metrics": {
             "operations_scanned": 12,
@@ -64,6 +65,7 @@ class ScreeningResponse(BaseModel):
     risk_level: Literal["low", "elevated", "high"]
     threshold: int
     threshold_exceeded: bool
+    scoring_policy_version: str = "1.0.0"
     signals: list[RiskSignalResponse]
     metrics: ScreeningMetricsResponse
     source: ScreeningSourceResponse
