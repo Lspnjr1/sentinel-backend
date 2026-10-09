@@ -32,6 +32,12 @@ class ScreeningSourceResponse(BaseModel):
     observed_at: str
 
 
+class ActivitySampleResponse(BaseModel):
+    operations_scanned: int
+    scan_limit: int
+    may_be_incomplete: bool
+
+
 class ScreeningResponse(BaseModel):
     model_config = ConfigDict(json_schema_extra={"examples": [{
         "address": "GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -40,6 +46,11 @@ class ScreeningResponse(BaseModel):
         "threshold": 70,
         "threshold_exceeded": False,
         "scoring_policy_version": "1.0.0",
+        "activity_sample": {
+            "operations_scanned": 12,
+            "scan_limit": 200,
+            "may_be_incomplete": False,
+        },
         "signals": [],
         "metrics": {
             "operations_scanned": 12,
@@ -66,6 +77,7 @@ class ScreeningResponse(BaseModel):
     threshold: int
     threshold_exceeded: bool
     scoring_policy_version: str = "1.0.0"
+    activity_sample: ActivitySampleResponse | None = None
     signals: list[RiskSignalResponse]
     metrics: ScreeningMetricsResponse
     source: ScreeningSourceResponse

@@ -27,6 +27,7 @@ def test_public_response_models_are_documented_with_examples():
 
     assert ScreeningResponse.model_fields["score"].annotation is int
     assert ScreeningResponse.model_fields["scoring_policy_version"].default == "1.0.0"
+    assert "activity_sample" in ScreeningResponse.model_fields
     assert "events" in EventsResponse.model_fields
     assert "status" in NetworkStatusResponse.model_fields
 
